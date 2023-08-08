@@ -11,7 +11,7 @@ const youtube = google.youtube({
   auth: apiKey,
 });
 
-const domain = "react nextjs"; // Your specific domain here
+const domain = "programming coding"; // Your specific domain here
 const minSubscribers = 5000;
 const NUMBER_OF_RESULTS = 100000;
 const FETCH_RESULTS = 50;
@@ -19,6 +19,8 @@ const FETCH_RESULTS = 50;
 let count;
 
 async function searchChannels() {
+  let channelCount = 0;
+
   try {
     let nextPageToken = null;
     let channelDetails = [];
@@ -32,11 +34,13 @@ async function searchChannels() {
         pageToken: nextPageToken,
       });
 
-      count+= FETCH_RESULTS;
+      count += FETCH_RESULTS;
 
       const relevantChannels = response.data.items;
 
       for (const channel of relevantChannels) {
+        channelCount++;
+
         const channelId = channel.id.channelId;
         const channelResponse = await youtube.channels.list({
           part: "snippet,statistics",
@@ -46,8 +50,9 @@ async function searchChannels() {
         const details = channelResponse.data.items[0];
         if (details.statistics.subscriberCount > minSubscribers) {
           console.log(
+            channelCount,
             details.snippet.title,
-            details.statistics.subscriberCount
+            details.statistics.subscriberCount,
           );
           channelDetails.push({
             Subscribers: details.statistics.subscriberCount,
@@ -59,8 +64,8 @@ async function searchChannels() {
         }
       }
       const csvData = json2csv(channelDetails);
+      channelDetails = [];
       fs.appendFileSync("youtube_channel_list.csv", csvData, "utf-8");
-      channelDetails = []
 
       if (count === NUMBER_OF_RESULTS) break;
 
