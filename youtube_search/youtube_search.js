@@ -3,7 +3,7 @@ const { google } = require("googleapis");
 const json2csv = require("json2csv").parse;
 
 // Your YouTube API credentials (replace with your actual values)
-const apiKey = "AIzaSyBR3F9lodP7zQ3wiY3FY0dHS_8edP5j6NM";
+const apiKey = "AIzaSyC9w1tFDfHAM30GJ1M46YCmRiew0nPVEUA";
 
 // Initialize the YouTube API client
 const youtube = google.youtube({
@@ -11,7 +11,7 @@ const youtube = google.youtube({
   auth: apiKey,
 });
 
-const domain = "Mobile App Development"; // Your specific domain here
+const domain = "Design Figma"; // Your specific domain here
 const minSubscribers = 5000;
 const NUMBER_OF_RESULTS = 1000000;
 const FETCH_RESULTS = 100;

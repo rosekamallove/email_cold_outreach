@@ -3,10 +3,11 @@ const { Client } = require("@notionhq/client");
 const nodemailer = require("nodemailer");
 const marked = require("marked"); // Library to convert Markdown to HTML
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
+require('dotenv').config(); // Load environment variables from .env
 
 // Replace with your Notion API credentials
-const NOTION_API_KEY = "";
-const DATABASE_ID = "";
+const NOTION_API_KEY = process.env.NOTION_API_KEY;
+const DATABASE_ID = process.env.DATABASE_ID;
 
 // Define the CSV file path
 const CSV_FILE_PATH = "email_results.csv";
@@ -49,8 +50,8 @@ async function queryNotionDatabase() {
       port: 465,
       secure: true,
       auth: {
-        user: "",
-        pass: "",
+        user: process.env.SMTP_USERNAME,
+        pass: process.env.SMTP_PASSWORD,
       },
     });
 
@@ -78,7 +79,7 @@ async function queryNotionDatabase() {
       const mailOptions = {
         from: "kamal@kroto.in",
         to: row.properties["email"]?.email,
-        subject: "10 Spots Left! 😱 Create Interactive Courses with 🤖 AI",
+        subject: "Generate awesome courses with AI, with no effort from you side.",
         html: marked.parse(emailBody, {
           headerIds: false,
           mangle: false,

@@ -6,10 +6,11 @@
     "csv": "^6.3.1",
     "csv-parser": "^3.0.0",
     "csv-writer": "^1.6.0",
+    "dotenv": "^16.3.1",
     "fs": "^0.0.1-security",
     "googleapis": "^123.0.0",
     "json2csv": "^6.0.0-alpha.2",
-    "marked": "^6.0.0",
+    "marked": "^7.0.1",
     "nodemailer": "^6.9.4",
     "youtube": "^0.1.0"
   }
